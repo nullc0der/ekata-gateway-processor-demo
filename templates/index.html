@@ -89,9 +89,9 @@
                 </div>
             </div>
         </div>
-        <script src="http://localhost:8001/gatewayprocessorform.js"></script>
+        <script src="http://localhost:8001/ekatagatewayprocessorform.js"></script>
         <script type="text/javascript">
-            const gatewayform = new GatewayProcessorForm({
+            const gatewayform = new EkataGatewayProcessorForm({
                 projectID: "aab69f8c-a992-4c78-b834-fddf281a8064",
                 onError: (data) => console.log(data),
                 onCloseForm: (reason) => console.log(reason),
@@ -102,7 +102,7 @@
                             "Content-Type": "application/json",
                         },
                         body: JSON.stringify(data),
-                    }).then((response) => window.location.href = '/success'),
+                    }).then((response) => (window.location.href = "/success")),
             });
             function showPaymentForm(itemPrice) {
                 fetch("http://localhost:5000/create-form", {
