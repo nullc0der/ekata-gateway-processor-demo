@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Demo</title>
+        <link rel="stylesheet" type="text/css" href="/static/css/index.css" />
+    </head>
+    <body>
+        <div class="w-screen h-screen bg-gray-100 py-4">
+            <div class="container mx-auto">
+                <div
+                    class="
+                        flex flex-col
+                        md:flex-row
+                        justify-center
+                        items-center
+                    "
+                >
+                    <div
+                        class="
+                            bg-white
+                            shadow-md
+                            rounded-md
+                            p-4
+                            flex flex-col
+                            shop-item
+                        "
+                    >
+                        <img
+                            class="h-48 w-48 mx-auto"
+                            src="/static/img/shoe.webp"
+                            alt="Shoe image"
+                        />
+                        <div class="flex flex-row justify-between align-middle">
+                            <p class="text-black leading-4">Shoe</p>
+                            <p class="text-gray-500 text-xs">$20.99</p>
+                        </div>
+                        <button
+                            class="
+                                p-2
+                                mt-2
+                                bg-green-500
+                                rounded-md
+                                text-white
+                                buy-now-btn
+                            "
+                            data-price="20.99"
+                        >
+                            Buy Now
+                        </button>
+                    </div>
+                    <div
+                        class="
+                            bg-white
+                            shadow-md
+                            rounded-md
+                            p-4
+                            flex flex-col
+                            mt-4
+                            md:mt-0 md:ml-4
+                            shop-item
+                        "
+                    >
+                        <img
+                            class="h-48 w-48 mx-auto"
+                            src="/static/img/tshirt.webp"
+                            alt="Shoe image"
+                        />
+                        <div class="flex flex-row justify-between align-middle">
+                            <p class="text-black leading-4">Tshirt</p>
+                            <p class="text-gray-500 text-xs">$14.99</p>
+                        </div>
+                        <button
+                            class="
+                                p-2
+                                mt-2
+                                bg-green-500
+                                rounded-md
+                                text-white
+                                buy-now-btn
+                            "
+                            data-price="14.99"
+                        >
+                            Buy Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="http://localhost:8001/gatewayprocessorform.js"></script>
+        <script type="text/javascript">
+            const gatewayform = new GatewayProcessorForm({
+                projectID: "aab69f8c-a992-4c78-b834-fddf281a8064",
+                onError: (data) => console.log(data),
+                onCloseForm: (reason) => console.log(reason),
+                onSuccess: (data) =>
+                    fetch("http://localhost:5000/payment-success", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(data),
+                    }).then((response) => window.location.href = '/success'),
+            });
+            function showPaymentForm(itemPrice) {
+                fetch("http://localhost:5000/create-form", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ item_price: itemPrice }),
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        gatewayform.showPaymentForm(data.form_id);
+                    });
+            }
+            const btns = document.querySelectorAll(".buy-now-btn");
+            btns.forEach((btn) =>
+                btn.addEventListener("click", (e) => {
+                    showPaymentForm(e.target.getAttribute("data-price"));
+                })
+            );
+        </script>
+    </body>
+</html>
