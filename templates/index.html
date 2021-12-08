@@ -89,23 +89,26 @@
                 </div>
             </div>
         </div>
-        <script src="http://localhost:8001/ekatagatewayprocessorform.js"></script>
+        <script src="https://gatewayprocessorform.ekata.io/gatewayprocessor.min.js"></script>
         <script type="text/javascript">
             const gatewayform = new EkataGatewayProcessorForm({
-                projectID: "aab69f8c-a992-4c78-b834-fddf281a8064",
+                projectID: "d36ad22a-c545-4e94-9f3f-712f5a7ed759",
                 onError: (data) => console.log(data),
                 onCloseForm: (reason) => console.log(reason),
                 onSuccess: (data) =>
-                    fetch("http://localhost:5000/payment-success", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify(data),
-                    }).then((response) => (window.location.href = "/success")),
+                    fetch(
+                        "https://gatewayprocessordemo.ekata.io/payment-success",
+                        {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify(data),
+                        }
+                    ).then((response) => (window.location.href = "/success")),
             });
             function showPaymentForm(itemPrice) {
-                fetch("http://localhost:5000/create-form", {
+                fetch("https://gatewayprocessordemo.ekata.io/create-form", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
