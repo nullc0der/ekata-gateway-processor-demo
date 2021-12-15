@@ -17,8 +17,8 @@ def create_form():
     data = {
         'amount_requested': float(request.json['item_price']) * 100,
         'fiat_currency': 'USD',
-        'project_id': 'd36ad22a-c545-4e94-9f3f-712f5a7ed759',
-        'api_key': 'Lk_fe2r4TVr7KXMyyzd4T5miFQcAo8Q_RlY0gP8jTc0'
+        'project_id': 'd489c31e-8a93-40f1-95c6-7eca8622901e',
+        'api_key': 'NL12-CxRtDOh5JycnBlhFIoOfbCLGF7kug5oZFDCRv0'
     }
     res = requests.post(
         'https://gatewayprocessorapi.ekata.io/api/v1/payment-form/create',
@@ -33,7 +33,7 @@ def payment_success():
               f"{request.json['wallet_address']}" + \
         f"{request.json['amount_received']}"
     signature = hmac.new(
-        "Xoww80Frr4mDI5E8JhrxLAQG1IHv-__rvCBTf-2cdBo".encode(),
+        "lxvD4Aiv9ozxePVsUNoNLTKiS24RdlpMkZJW6pbz8Rs".encode(),
         message.encode(),
         hashlib.sha256).hexdigest()
     if signature == request.json['signature']:
@@ -53,7 +53,7 @@ def payment_webhook():
               f"{request.json['wallet_address']}" + \
         f"{request.json['amount_received']}"
     signature = hmac.new(
-        "Xoww80Frr4mDI5E8JhrxLAQG1IHv-__rvCBTf-2cdBo".encode(),
+        "lxvD4Aiv9ozxePVsUNoNLTKiS24RdlpMkZJW6pbz8Rs".encode(),
         message.encode(),
         hashlib.sha256).hexdigest()
     if signature == request.json['signature']:
