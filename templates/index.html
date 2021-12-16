@@ -8,23 +8,33 @@
         <link rel="stylesheet" type="text/css" href="/static/css/index.css" />
     </head>
     <body>
-        <div class="w-screen h-screen bg-gray-100 py-4">
+        <div class="w-screen h-screen bg-gray-100 py-4 px-4">
+            <div class="flex flex-row justify-end mb-4">
+                <ul>
+                    <li class="inline">
+                        <a
+                            target="_blank"
+                            href="https://gatewayprocessorconsole.ekata.io"
+                            class="text-gray-500"
+                            >Client console</a
+                        >
+                    </li>
+                    <li class="inline">|</li>
+                    <li class="inline">
+                        <a href="#" class="text-gray-500">Docs (Coming Soon)</a>
+                    </li>
+                </ul>
+            </div>
             <div class="container mx-auto">
-                <h3 class="text-center text-3xl mb-8">
-                    Demo shop for ekata.io gateway processor
+                <h3 class="text-center md:text-3xl text-xl mb-4">
+                    Demo Shop for Ekata.io Gateway Processor
                 </h3>
-                <p class="text-gray-500 text-center">
-                    This shop doesn't operate on mainnet coin/token, please
-                    don't try sending mainnet coin/token
+                <p class="text-red-400 text-center text-xs">
+                    Warning: Please do not send mainnet coins or tokens to this
+                    demo site. This shop does not operate on mainnet coins or
+                    tokens and is for demo purposes only
                 </p>
-                <div
-                    class="
-                        flex flex-col
-                        md:flex-row
-                        justify-center
-                        items-center
-                    "
-                >
+                <div class="flex flex-col md:flex-row items-center flex-wrap">
                     {% for shop_item in shop_items %}
                     <div
                         class="

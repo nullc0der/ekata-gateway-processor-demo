@@ -41,6 +41,22 @@ def index():
                 'link': '/static/img/jeans.jpg',
                 'alt': 'Jeans image'
             }
+        },
+        {
+            'name': 'Raspberry PI 4',
+            'price': '54.99',
+            'image': {
+                'link': '/static/img/pi4.png',
+                'alt': 'PI 4 image'
+            }
+        },
+        {
+            'name': 'RAM DDR4 8GB',
+            'price': '65.99',
+            'image': {
+                'link': '/static/img/ram.png',
+                'alt': 'RAM image'
+            }
         }
     ]
     return render_template('index.html', shop_items=shop_items)
