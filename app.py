@@ -9,7 +9,41 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    shop_items = [
+        {
+            'name': 'Shoe',
+            'price': '20.99',
+            'image': {
+                'link': '/static/img/shoe.webp',
+                'alt': 'Shoe image'
+            }
+        },
+        {
+            'name': 'T-Shirt',
+            'price': '14.99',
+            'image': {
+                'link': '/static/img/tshirt.webp',
+                'alt': 'T-Shirt image'
+            }
+        },
+        {
+            'name': 'Cap',
+            'price': '5.99',
+            'image': {
+                'link': '/static/img/cap.jpg',
+                'alt': 'Cap image'
+            }
+        },
+        {
+            'name': 'Jeans',
+            'price': '18.99',
+            'image': {
+                'link': '/static/img/jeans.jpg',
+                'alt': 'Jeans image'
+            }
+        }
+    ]
+    return render_template('index.html', shop_items=shop_items)
 
 
 @app.route('/create-form', methods=['POST'])

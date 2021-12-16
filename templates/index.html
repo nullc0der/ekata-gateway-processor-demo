@@ -10,6 +10,13 @@
     <body>
         <div class="w-screen h-screen bg-gray-100 py-4">
             <div class="container mx-auto">
+                <h3 class="text-center text-3xl mb-8">
+                    Demo shop for ekata.io gateway processor
+                </h3>
+                <p class="text-gray-500 text-center">
+                    This shop doesn't operate on mainnet coin/token, please
+                    don't try sending mainnet coin/token
+                </p>
                 <div
                     class="
                         flex flex-col
@@ -18,39 +25,7 @@
                         items-center
                     "
                 >
-                    <div
-                        class="
-                            bg-white
-                            shadow-md
-                            rounded-md
-                            p-4
-                            flex flex-col
-                            shop-item
-                        "
-                    >
-                        <img
-                            class="h-48 w-48 mx-auto"
-                            src="/static/img/shoe.webp"
-                            alt="Shoe image"
-                        />
-                        <div class="flex flex-row justify-between align-middle">
-                            <p class="text-black leading-4">Shoe</p>
-                            <p class="text-gray-500 text-xs">$20.99</p>
-                        </div>
-                        <button
-                            class="
-                                p-2
-                                mt-2
-                                bg-green-500
-                                rounded-md
-                                text-white
-                                buy-now-btn
-                            "
-                            data-price="20.99"
-                        >
-                            Buy Now
-                        </button>
-                    </div>
+                    {% for shop_item in shop_items %}
                     <div
                         class="
                             bg-white
@@ -59,18 +34,29 @@
                             p-4
                             flex flex-col
                             mt-4
-                            md:mt-0 md:ml-4
+                            md:ml-4
                             shop-item
                         "
                     >
                         <img
                             class="h-48 w-48 mx-auto"
-                            src="/static/img/tshirt.webp"
-                            alt="Shoe image"
+                            src="{{ shop_item['image']['link'] }}"
+                            alt="{{ shop_item['image']['alt'] }}"
                         />
-                        <div class="flex flex-row justify-between align-middle">
-                            <p class="text-black leading-4">Tshirt</p>
-                            <p class="text-gray-500 text-xs">$14.99</p>
+                        <div
+                            class="
+                                flex flex-row
+                                justify-between
+                                align-middle
+                                mt-2
+                            "
+                        >
+                            <p class="text-black leading-4">
+                                {{ shop_item['name'] }}
+                            </p>
+                            <p class="text-gray-500 text-xs">
+                                ${{ shop_item['price'] }}
+                            </p>
                         </div>
                         <button
                             class="
@@ -81,11 +67,12 @@
                                 text-white
                                 buy-now-btn
                             "
-                            data-price="14.99"
+                            data-price="{{ shop_item['price'] }}"
                         >
                             Buy Now
                         </button>
                     </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
