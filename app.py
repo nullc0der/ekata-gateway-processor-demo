@@ -1,6 +1,8 @@
 import requests
 import hmac
 import hashlib
+from decimal import Decimal
+
 from flask import Flask, render_template, jsonify, request
 
 
@@ -57,6 +59,14 @@ def index():
                 'link': '/static/img/ram.png',
                 'alt': 'RAM image'
             }
+        },
+        {
+            'name': 'PinePhone',
+            'price': '199.99',
+            'image': {
+                'link': '/static/img/pinephone.png',
+                'alt': 'Pinephone Image'
+            }
         }
     ]
     return render_template('index.html', shop_items=shop_items)
@@ -65,7 +75,7 @@ def index():
 @app.route('/create-form', methods=['POST'])
 def create_form():
     data = {
-        'amount_requested': float(request.json['item_price']) * 100,
+        'amount_requested': int(Decimal(request.json['item_price']) * 100),
         'fiat_currency': 'USD',
         'project_id': 'd489c31e-8a93-40f1-95c6-7eca8622901e',
         'api_key': 'NL12-CxRtDOh5JycnBlhFIoOfbCLGF7kug5oZFDCRv0'
