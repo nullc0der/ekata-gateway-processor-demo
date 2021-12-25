@@ -102,7 +102,9 @@
                             },
                             body: JSON.stringify(data),
                         }
-                    ).then((response) => console.log(response)),
+                    ).then(() => {
+                        window.location = "/success";
+                    }),
             });
             function showPaymentForm(itemPrice) {
                 fetch("https://gatewayprocessordemo.ekata.io/create-form", {
