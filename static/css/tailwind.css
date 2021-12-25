@@ -5,3 +5,7 @@
 .shop-item {
     width: 280px;
 }
+
+body {
+    overflow-x: hidden;
+}
