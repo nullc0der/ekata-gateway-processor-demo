@@ -1,3 +1,4 @@
+import os
 import requests
 import hmac
 import hashlib
@@ -69,7 +70,11 @@ def index():
             }
         }
     ]
-    return render_template('index.html', shop_items=shop_items)
+    return render_template(
+        'index.html', 
+        shop_items=shop_items,
+        api_key=os.environ.get("GATEWAY_PROCESSOR_PROJECT_ID"),
+        form_url=os.environ.get("GATEWAY_PROCESSOR_FORM_URL"))
 
 
 @app.route('/create-form', methods=['POST'])
@@ -77,11 +82,11 @@ def create_form():
     data = {
         'amount_requested': int(Decimal(request.json['item_price']) * 100),
         'fiat_currency': 'USD',
-        'project_id': 'd489c31e-8a93-40f1-95c6-7eca8622901e',
-        'api_key': 'NL12-CxRtDOh5JycnBlhFIoOfbCLGF7kug5oZFDCRv0'
+        'project_id': os.environ.get("GATEWAY_PROCESSOR_PROJECT_ID"),
+        'api_key': os.environ.get("GATEWAY_PROCESSOR_PROJECT_API_KEY")
     }
     res = requests.post(
-        'https://gatewayprocessorapi.ekata.io/api/v1/payment-form/create',
+        f'{os.environ.get("GATEWAY_PROCESSOR_API_URL")}/payment-form/create',
         json=data)
     return jsonify({'form_id': res.json()['id']})
 
@@ -93,7 +98,7 @@ def payment_success():
               f"{request.json['wallet_address']}" + \
         f"{request.json['amount_received']}"
     signature = hmac.new(
-        "lxvD4Aiv9ozxePVsUNoNLTKiS24RdlpMkZJW6pbz8Rs".encode(),
+        os.environ.get("GATEWAY_PROCESSOR_PROJECT_API_SECRET").encode(),
         message.encode(),
         hashlib.sha256).hexdigest()
     if signature == request.json['signature']:
@@ -113,7 +118,7 @@ def payment_webhook():
               f"{request.json['wallet_address']}" + \
         f"{request.json['amount_received']}"
     signature = hmac.new(
-        "lxvD4Aiv9ozxePVsUNoNLTKiS24RdlpMkZJW6pbz8Rs".encode(),
+        os.environ.get("GATEWAY_PROCESSOR_PROJECT_API_SECRET").encode(),
         message.encode(),
         hashlib.sha256).hexdigest()
     if signature == request.json['signature']:
