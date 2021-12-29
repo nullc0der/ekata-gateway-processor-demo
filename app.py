@@ -71,7 +71,7 @@ def index():
         }
     ]
     return render_template(
-        'index.html', 
+        'index.html',
         shop_items=shop_items,
         api_key=os.environ.get("GATEWAY_PROCESSOR_PROJECT_ID"),
         form_url=os.environ.get("GATEWAY_PROCESSOR_FORM_URL"))
