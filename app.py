@@ -96,7 +96,7 @@ def payment_success():
     print(request.json)
     message = f"{request.json['payment_id']}" + \
               f"{request.json['wallet_address']}" + \
-        f"{request.json['amount_received']}"
+        f"{request.json['currency_name']}"
     signature = hmac.new(
         os.environ.get("GATEWAY_PROCESSOR_PROJECT_API_SECRET").encode(),
         message.encode(),
@@ -116,7 +116,7 @@ def payment_webhook():
     print(request.json)
     message = f"{request.json['payment_id']}" + \
               f"{request.json['wallet_address']}" + \
-        f"{request.json['amount_received']}"
+        f"{request.json['currency_name']}"
     signature = hmac.new(
         os.environ.get("GATEWAY_PROCESSOR_PROJECT_API_SECRET").encode(),
         message.encode(),
