@@ -73,7 +73,7 @@ def index():
     return render_template(
         'index.html',
         shop_items=shop_items,
-        api_key=os.environ.get("GATEWAY_PROCESSOR_PROJECT_ID"),
+        project_id=os.environ.get("GATEWAY_PROCESSOR_PROJECT_ID"),
         form_url=os.environ.get("GATEWAY_PROCESSOR_FORM_URL"))
 
 
@@ -98,7 +98,8 @@ def payment_success():
               f"{request.json['wallet_address']}" + \
         f"{request.json['currency_name']}"
     signature = hmac.new(
-        os.environ.get("GATEWAY_PROCESSOR_PROJECT_API_SECRET").encode(),
+        os.environ.get(
+            "GATEWAY_PROCESSOR_PROJECT_PAYMENT_SIGNATURE_SECRET").encode(),
         message.encode(),
         hashlib.sha256).hexdigest()
     if signature == request.json['signature']:
@@ -118,7 +119,8 @@ def payment_webhook():
               f"{request.json['wallet_address']}" + \
         f"{request.json['currency_name']}"
     signature = hmac.new(
-        os.environ.get("GATEWAY_PROCESSOR_PROJECT_API_SECRET").encode(),
+        os.environ.get(
+            "GATEWAY_PROCESSOR_PROJECT_PAYMENT_SIGNATURE_SECRET").encode(),
         message.encode(),
         hashlib.sha256).hexdigest()
     if signature == request.json['signature']:

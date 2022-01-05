@@ -75,7 +75,7 @@
         <script src="{{form_url}}"></script>
         <script type="text/javascript">
             const gatewayform = new EkataGatewayProcessorForm({
-                projectID: "{{api_key}}",
+                projectID: "{{project_id}}",
                 onError: (data) => console.log(data),
                 onCloseForm: (reason) => console.log(reason),
                 onSuccess: (data) =>
