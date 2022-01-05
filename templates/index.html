@@ -9,19 +9,26 @@
     </head>
     <body>
         <div class="w-screen h-screen bg-gray-100 py-4 px-4">
-            <div class="flex flex-row justify-end mb-4">
+            <div class="flex flex-row justify-end mb-4 mr-4">
                 <ul>
                     <li class="inline">
                         <a
                             target="_blank"
-                            href="https://gatewayprocessorconsole.ekata.io"
+                            href="https://gpconsole.ekata.io"
                             class="text-gray-500"
+                            rel="noreferrer"
                             >Client Console</a
                         >
                     </li>
                     <li class="inline">|</li>
                     <li class="inline">
-                        <a href="#" class="text-gray-500">Docs (Coming Soon)</a>
+                        <a
+                            href="http://gpdocs.ekata.io"
+                            class="text-gray-500"
+                            target="_blank"
+                            rel="noreferrer"
+                            >Docs</a
+                        >
                     </li>
                 </ul>
             </div>
@@ -37,16 +44,7 @@
                 <div class="flex flex-col md:flex-row items-center flex-wrap">
                     {% for shop_item in shop_items %}
                     <div
-                        class="
-                            bg-white
-                            shadow-md
-                            rounded-md
-                            p-4
-                            flex flex-col
-                            mt-4
-                            md:ml-4
-                            shop-item
-                        "
+                        class="bg-white shadow-md rounded-md p-4 flex flex-col mt-4 md:ml-4 shop-item"
                     >
                         <img
                             class="h-48 w-48 mx-auto"
@@ -54,12 +52,7 @@
                             alt="{{ shop_item['image']['alt'] }}"
                         />
                         <div
-                            class="
-                                flex flex-row
-                                justify-between
-                                align-middle
-                                mt-2
-                            "
+                            class="flex flex-row justify-between align-middle mt-2"
                         >
                             <p class="text-black leading-4">
                                 {{ shop_item['name'] }}
@@ -69,14 +62,7 @@
                             </p>
                         </div>
                         <button
-                            class="
-                                p-2
-                                mt-2
-                                bg-green-500
-                                rounded-md
-                                text-white
-                                buy-now-btn
-                            "
+                            class="p-2 mt-2 bg-green-500 rounded-md text-white buy-now-btn"
                             data-price="{{ shop_item['price'] }}"
                         >
                             Buy Now
