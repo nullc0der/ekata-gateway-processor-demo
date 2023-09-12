@@ -13,3 +13,7 @@ Demo project for the ekata gateway processor
 - Run `yarn build` to compile css
 - Run `poetry install --no-dev` to install dependencies
 - Run `dotenv run poetry run flask run` to start dev server
+
+### Screencast
+
+- Head over to [screencast](/screencast) for the client frontend's screencast
